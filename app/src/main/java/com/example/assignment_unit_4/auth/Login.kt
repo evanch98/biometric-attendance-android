@@ -58,7 +58,9 @@ fun Login(navController: NavController) {
           .fillMaxWidth()
           .padding(20.dp),
       ) {
-        Text(text = "Please Log In", fontSize = 30.sp, fontWeight = FontWeight.Bold)
+        Text("Welcome Back", fontSize = 25.sp, fontWeight = FontWeight.Bold)
+        Spacer(modifier = Modifier.height(20.dp))
+        Text(text = "Please Log In to continue", fontSize = 20.sp)
         Spacer(modifier = Modifier.height(30.dp))
         OutlinedTextField(
           value = email,

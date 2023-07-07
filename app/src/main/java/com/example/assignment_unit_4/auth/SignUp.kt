@@ -29,8 +29,7 @@ fun SignUp() {
 
   Scaffold(topBar = {
     TopAppBar(title = { Text(text = "Sign Up") })
-  }) {
-    contentPadding ->
+  }) { contentPadding ->
     Column(
       horizontalAlignment = Alignment.CenterHorizontally,
       modifier = Modifier
@@ -39,13 +38,14 @@ fun SignUp() {
     ) {
       OutlinedTextField(
         value = name,
-        onValueChange = {name = it},
+        onValueChange = { name = it },
         label = { Text(text = "Name") },
         placeholder = {
           Text(
             text = "John"
           )
-        }, modifier = Modifier.fillMaxWidth())
+        }, modifier = Modifier.fillMaxWidth()
+      )
     }
   }
 }

@@ -19,6 +19,7 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarColors
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -34,6 +35,8 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.assignment_unit_4.Login
 import com.example.assignment_unit_4.ui.theme.Purple80
+import com.example.assignment_unit_4.utils.SnackBar
+import kotlinx.coroutines.delay
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -52,6 +55,14 @@ fun SignUp(navController: NavController) {
   }
 
   var confirmPassword by remember {
+    mutableStateOf("")
+  }
+
+  var showSnackBar by remember {
+    mutableStateOf(false)
+  }
+
+  var snackBarMessage by remember {
     mutableStateOf("")
   }
 
@@ -112,12 +123,30 @@ fun SignUp(navController: NavController) {
         )
         Spacer(modifier = Modifier.height(30.dp))
         Button(
-          onClick = { navController.navigate(Login.route) },
+          onClick = {
+            showSnackBar = true
+            snackBarMessage =
+              if (name.isBlank() || email.isBlank() || password.isBlank() || confirmPassword.isBlank()) {
+                "Registration unsuccessful. Please enter all data."
+              } else if (password != confirmPassword) {
+                "Registration unsuccessful. Please recheck the password."
+              } else {
+                navController.navigate(Login.route)
+                "Registration successful. Please Log In."
+              }
+          },
           modifier = Modifier
             .width(250.dp)
             .height(50.dp)
         ) {
           Text(text = "Sign Up", fontSize = 20.sp)
+        }
+        if (showSnackBar) {
+          SnackBar(message = snackBarMessage)
+          LaunchedEffect(Unit) {
+            delay(2000)
+            showSnackBar = false
+          }
         }
       }
     }

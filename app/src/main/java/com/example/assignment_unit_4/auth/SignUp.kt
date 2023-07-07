@@ -32,6 +32,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.example.assignment_unit_4.Login
 import com.example.assignment_unit_4.ui.theme.Purple80
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -108,7 +109,12 @@ fun SignUp(navController: NavController) {
           keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password)
         )
         Spacer(modifier = Modifier.height(30.dp))
-        Button(onClick = { /*TODO*/ }, modifier = Modifier.width(250.dp).height(50.dp)) {
+        Button(
+          onClick = { navController.navigate(Login.route) },
+          modifier = Modifier
+            .width(250.dp)
+            .height(50.dp)
+        ) {
           Text(text = "Sign Up", fontSize = 20.sp)
         }
       }

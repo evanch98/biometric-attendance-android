@@ -10,6 +10,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.compose.rememberNavController
 import com.example.assignment_unit_4.auth.SignUp
 import com.example.assignment_unit_4.ui.theme.Assignment_unit_4Theme
 
@@ -20,9 +21,15 @@ class MainActivity : ComponentActivity() {
       Assignment_unit_4Theme {
         // A surface container using the 'background' color from the theme
         Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background) {
-          SignUp()
+          MyNavigation()
         }
       }
     }
   }
+}
+
+@Composable
+fun MyNavigation() {
+  val navController = rememberNavController()
+  Navigation(navController = navController)
 }

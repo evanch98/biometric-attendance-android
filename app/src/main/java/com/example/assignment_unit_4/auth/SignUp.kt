@@ -138,6 +138,8 @@ fun SignUp(navController: NavController) {
                 "Registration unsuccessful. Please enter all data."
               } else if (password != confirmPassword) {
                 "Registration unsuccessful. Please recheck the password."
+              } else if (!email.contains("@")) {
+                "Invalid email. Please enter the valid email address."
               } else {
                 sharedPreferences.edit().putString("name", name).apply()
                 sharedPreferences.edit().putString("email", email).apply()

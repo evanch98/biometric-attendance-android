@@ -1,5 +1,6 @@
 package com.example.assignment_unit_4.auth
 
+import android.content.Context
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -16,32 +17,46 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.assignment_unit_4.ui.theme.Purple80
+import com.example.assignment_unit_4.utils.SnackBar
+import kotlinx.coroutines.delay
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun Login(navController: NavController) {
 
-  var name by remember {
-    mutableStateOf("")
-  }
+  val sharedPreferences =
+    LocalContext.current.getSharedPreferences("UserAccountData", Context.MODE_PRIVATE)
+
+  val registeredEmail = sharedPreferences.getString("email", "")
+  val registeredPassword = sharedPreferences.getString("password", "")
 
   var email by remember {
     mutableStateOf("")
   }
 
   var password by remember {
+    mutableStateOf("")
+  }
+
+  var showSnackBar by remember {
+    mutableStateOf(false)
+  }
+
+  var snackBarMessage by remember {
     mutableStateOf("")
   }
 
@@ -82,10 +97,26 @@ fun Login(navController: NavController) {
           keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password)
         )
         Spacer(modifier = Modifier.height(30.dp))
-        Button(onClick = { /*TODO*/ }, modifier = Modifier
-          .width(250.dp)
-          .height(50.dp)) {
+        Button(
+          onClick = {
+            showSnackBar = true
+                    snackBarMessage = if (email == registeredEmail && password == registeredPassword) {
+                      "Correct Credential"
+                    } else {
+                      "Login failed. Email or password is incorrect."
+                    }
+          }, modifier = Modifier
+            .width(250.dp)
+            .height(50.dp)
+        ) {
           Text(text = "Log In", fontSize = 20.sp)
+        }
+        if (showSnackBar) {
+          SnackBar(message = snackBarMessage)
+          LaunchedEffect(Unit) {
+            delay(2000)
+            showSnackBar = false
+          }
         }
       }
     }

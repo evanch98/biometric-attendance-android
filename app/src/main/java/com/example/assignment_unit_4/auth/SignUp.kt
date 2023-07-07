@@ -68,7 +68,9 @@ fun SignUp(navController: NavController) {
           .fillMaxWidth()
           .padding(20.dp),
       ) {
-        Text(text = "Please Sign Up", fontSize = 30.sp, fontWeight = FontWeight.Bold)
+        Text("Welcome", fontSize = 25.sp, fontWeight = FontWeight.Bold)
+        Spacer(modifier = Modifier.height(20.dp))
+        Text(text = "Please Sign Up to continue", fontSize = 20.sp)
         Spacer(modifier = Modifier.height(30.dp))
         OutlinedTextField(
           value = name,

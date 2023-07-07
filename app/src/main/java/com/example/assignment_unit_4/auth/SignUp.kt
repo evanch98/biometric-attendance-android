@@ -1,6 +1,7 @@
 package com.example.assignment_unit_4.auth
 
 
+import android.content.Context
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -27,6 +28,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
@@ -42,6 +44,9 @@ import kotlinx.coroutines.delay
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SignUp(navController: NavController) {
+
+  val sharedPreferences =
+    LocalContext.current.getSharedPreferences("UserAccountData", Context.MODE_PRIVATE)
 
   var name by remember {
     mutableStateOf("")
@@ -134,6 +139,10 @@ fun SignUp(navController: NavController) {
               } else if (password != confirmPassword) {
                 "Registration unsuccessful. Please recheck the password."
               } else {
+                sharedPreferences.edit().putString("name", name).apply()
+                sharedPreferences.edit().putString("email", email).apply()
+                sharedPreferences.edit().putString("password", password).apply()
+                sharedPreferences.edit().putBoolean("isRegistered", true).apply()
                 navController.navigate(Login.route)
                 "Registration successful. Please Log In."
               }

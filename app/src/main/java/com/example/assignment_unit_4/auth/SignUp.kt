@@ -1,10 +1,14 @@
 package com.example.assignment_unit_4.auth
 
 
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
@@ -17,7 +21,12 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.font.FontStyle
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -27,25 +36,69 @@ fun SignUp() {
     mutableStateOf("")
   }
 
+  var email by remember {
+    mutableStateOf("")
+  }
+
+  var password by remember {
+    mutableStateOf("")
+  }
+
+  var confirmPassword by remember {
+    mutableStateOf("")
+  }
+
   Scaffold(topBar = {
     TopAppBar(title = { Text(text = "Sign Up") })
   }) { contentPadding ->
-    Column(
-      horizontalAlignment = Alignment.CenterHorizontally,
-      modifier = Modifier
-        .fillMaxWidth()
-        .padding(contentPadding),
-    ) {
-      OutlinedTextField(
-        value = name,
-        onValueChange = { name = it },
-        label = { Text(text = "Name") },
-        placeholder = {
-          Text(
-            text = "John"
-          )
-        }, modifier = Modifier.fillMaxWidth()
-      )
+    Box(modifier = Modifier.padding(contentPadding)) {
+      Column(
+        horizontalAlignment = Alignment.CenterHorizontally,
+        modifier = Modifier
+          .fillMaxWidth()
+          .padding(20.dp),
+      ) {
+        Text(text = "Please Sign Up", fontSize = 30.sp, fontWeight = FontWeight.Bold)
+        Spacer(modifier = Modifier.height(30.dp))
+        OutlinedTextField(
+          value = name,
+          onValueChange = { name = it },
+          label = { Text(text = "Name") },
+          placeholder = {
+            Text(
+              text = "John Doe"
+            )
+          }, modifier = Modifier.fillMaxWidth()
+        )
+        Spacer(modifier = Modifier.height(30.dp))
+        OutlinedTextField(
+          value = email,
+          onValueChange = { email = it },
+          label = { Text(text = "Email") },
+          placeholder = {
+            Text(
+              text = "johndoe@uopeople.edu"
+            )
+          }, modifier = Modifier.fillMaxWidth(),
+          keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email)
+        )
+        Spacer(modifier = Modifier.height(30.dp))
+        OutlinedTextField(
+          value = password,
+          onValueChange = { password = it },
+          label = { Text(text = "Password") },
+          modifier = Modifier.fillMaxWidth(),
+          keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password)
+        )
+        Spacer(modifier = Modifier.height(30.dp))
+        OutlinedTextField(
+          value = confirmPassword,
+          onValueChange = { confirmPassword = it },
+          label = { Text(text = "Confirm Password") },
+          modifier = Modifier.fillMaxWidth(),
+          keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password)
+        )
+      }
     }
   }
 }

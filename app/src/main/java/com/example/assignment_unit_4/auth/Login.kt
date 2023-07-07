@@ -26,11 +26,12 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.example.assignment_unit_4.ui.theme.Purple80
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun Login() {
+fun Login(navController: NavController) {
 
   var name by remember {
     mutableStateOf("")

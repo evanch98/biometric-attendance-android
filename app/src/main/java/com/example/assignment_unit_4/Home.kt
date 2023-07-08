@@ -59,7 +59,9 @@ fun Home(navController: NavController, activity: FragmentActivity) {
       colors = TopAppBarDefaults.smallTopAppBarColors(containerColor = Purple80)
     )
   }) { contentPadding ->
-    Box(modifier = Modifier.padding(contentPadding).fillMaxHeight()) {
+    Box(modifier = Modifier
+      .padding(contentPadding)
+      .fillMaxHeight()) {
       Column(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -73,9 +75,9 @@ fun Home(navController: NavController, activity: FragmentActivity) {
           onClick = {
             Biometric.authenticate(
               activity,
-              title = "Biometric Authentication",
+              title = "Fingerprint Authentication",
               subtitle = "Authenticate to proceed",
-              description = "Authentication is required",
+              description = "Authentication is required to check in",
               negativeText = "Cancel",
               onSuccess = {
                 showSnackBar = true
@@ -100,7 +102,29 @@ fun Home(navController: NavController, activity: FragmentActivity) {
         }
         Spacer(modifier = Modifier.height(30.dp))
         Button(
-          onClick = { /*TODO*/ }, modifier = Modifier
+          onClick = {
+            Biometric.authenticate(
+              activity,
+              title = "Fingerprint Authentication",
+              subtitle = "Authenticate to proceed",
+              description = "Authentication is required to check in",
+              negativeText = "Cancel",
+              onSuccess = {
+                showSnackBar = true
+                snackBarMessage = "Authentication Successful"
+              },
+              onError = { errorCode, errorString ->
+                run {
+                  showSnackBar = true
+                  snackBarMessage = "Error: $errorCode, $errorString"
+                }
+              },
+              onFailed = {
+                showSnackBar = true
+                snackBarMessage = "Authentication Failed"
+              }
+            )
+          }, modifier = Modifier
             .width(250.dp)
             .height(50.dp)
         ) {

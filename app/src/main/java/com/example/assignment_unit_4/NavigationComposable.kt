@@ -16,5 +16,8 @@ fun Navigation(navController: NavHostController) {
     composable(Login.route) {
       Login(navController = navController)
     }
+    composable(Home.route) {
+      Home(navController = navController)
+    }
   }
 }

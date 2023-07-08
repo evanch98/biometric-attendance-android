@@ -30,6 +30,7 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.example.assignment_unit_4.Home
 import com.example.assignment_unit_4.ui.theme.Purple80
 import com.example.assignment_unit_4.utils.SnackBar
 import kotlinx.coroutines.delay
@@ -101,7 +102,8 @@ fun Login(navController: NavController) {
           onClick = {
             showSnackBar = true
                     snackBarMessage = if (email == registeredEmail && password == registeredPassword) {
-                      "Correct Credential"
+                      navController.navigate(Home.route)
+                      "Logged in successfully"
                     } else {
                       "Login failed. Email or password is incorrect."
                     }

@@ -27,6 +27,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
@@ -95,7 +96,8 @@ fun Login(navController: NavController) {
           onValueChange = { password = it },
           label = { Text(text = "Password") },
           modifier = Modifier.fillMaxWidth(),
-          keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password)
+          keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
+          visualTransformation = PasswordVisualTransformation()
         )
         Spacer(modifier = Modifier.height(30.dp))
         Button(

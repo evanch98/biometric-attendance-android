@@ -1,6 +1,8 @@
 package com.example.assignment_unit_4
 
+import android.content.Context
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -9,7 +11,16 @@ import com.example.assignment_unit_4.auth.SignUp
 
 @Composable
 fun Navigation(navController: NavHostController) {
-  NavHost(navController = navController, startDestination = SignUp.route) {
+
+  val sharedPreferences =
+    LocalContext.current.getSharedPreferences("UserAccountData", Context.MODE_PRIVATE)
+
+  val isRegistered = sharedPreferences.getBoolean("isRegistered", false)
+
+  NavHost(
+    navController = navController,
+    startDestination = if (isRegistered) Login.route else SignUp.route
+  ) {
     composable(SignUp.route) {
       SignUp(navController = navController)
     }

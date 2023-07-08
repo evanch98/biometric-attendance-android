@@ -29,7 +29,7 @@ fun Navigation(navController: NavHostController, activity: FragmentActivity) {
       Login(navController = navController)
     }
     composable(Home.route) {
-      Home(navController = navController)
+      Home(navController = navController, activity = activity)
     }
   }
 }

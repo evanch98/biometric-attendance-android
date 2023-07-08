@@ -22,12 +22,13 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.fragment.app.FragmentActivity
 import androidx.navigation.NavController
 import com.example.assignment_unit_4.ui.theme.Purple80
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun Home(navController: NavController) {
+fun Home(navController: NavController, activity: FragmentActivity) {
 
   val sharedPreferences =
     LocalContext.current.getSharedPreferences("UserAccountData", Context.MODE_PRIVATE)

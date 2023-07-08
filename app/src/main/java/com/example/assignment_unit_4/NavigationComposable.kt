@@ -3,6 +3,7 @@ package com.example.assignment_unit_4
 import android.content.Context
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
+import androidx.fragment.app.FragmentActivity
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -10,7 +11,7 @@ import com.example.assignment_unit_4.auth.Login
 import com.example.assignment_unit_4.auth.SignUp
 
 @Composable
-fun Navigation(navController: NavHostController) {
+fun Navigation(navController: NavHostController, activity: FragmentActivity) {
 
   val sharedPreferences =
     LocalContext.current.getSharedPreferences("UserAccountData", Context.MODE_PRIVATE)

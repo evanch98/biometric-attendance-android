@@ -28,5 +28,5 @@ class MainActivity : FragmentActivity() {
 @Composable
 fun MyNavigation(activity: FragmentActivity) {
   val navController = rememberNavController()
-  Navigation(navController = navController)
+  Navigation(navController = navController, activity = activity)
 }

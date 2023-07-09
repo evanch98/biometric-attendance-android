@@ -33,5 +33,5 @@ class MainActivity : FragmentActivity() {
 @Composable
 fun MyNavigation(activity: FragmentActivity, database: AppDatabase) {
   val navController = rememberNavController()
-  Navigation(navController = navController, activity = activity)
+  Navigation(navController = navController, activity = activity, database = database)
 }

@@ -36,7 +36,7 @@ import kotlinx.coroutines.delay
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun Home(navController: NavController, activity: FragmentActivity) {
+fun Home(navController: NavController, activity: FragmentActivity, database: AppDatabase) {
 
   val sharedPreferences =
     LocalContext.current.getSharedPreferences("UserAccountData", Context.MODE_PRIVATE)

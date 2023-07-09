@@ -11,7 +11,7 @@ import com.example.assignment_unit_4.auth.Login
 import com.example.assignment_unit_4.auth.SignUp
 
 @Composable
-fun Navigation(navController: NavHostController, activity: FragmentActivity) {
+fun Navigation(navController: NavHostController, activity: FragmentActivity, database: AppDatabase) {
 
   val sharedPreferences =
     LocalContext.current.getSharedPreferences("UserAccountData", Context.MODE_PRIVATE)
@@ -29,7 +29,7 @@ fun Navigation(navController: NavHostController, activity: FragmentActivity) {
       Login(navController = navController)
     }
     composable(Home.route) {
-      Home(navController = navController, activity = activity)
+      Home(navController = navController, activity = activity, database = database)
     }
   }
 }

@@ -14,7 +14,7 @@ abstract class AppDatabase: RoomDatabase() {
   abstract fun attendanceDao(): AttendanceDao
 }
 
-@Entity
+@Entity(tableName = "attendances")
 data class AttendanceRoom(
   @PrimaryKey val id: Int,
   val checkIn: String,
@@ -23,10 +23,12 @@ data class AttendanceRoom(
 
 @Dao
 interface AttendanceDao {
-  @Query("SELECT * FROM AttendanceRoom")
+  @Query("SELECT * FROM attendances")
   fun getAll(): LiveData<List<AttendanceRoom>>
   @Insert
   fun insertAll(vararg attendance: AttendanceRoom)
-  @Query("SELECT (SELECT COUNT(*) FROM AttendanceRoom) == 0")
+  @Query("UPDATE attendances SET checkOut=:checkOut WHERE id=:id")
+  fun update(id: Int, checkOut: String)
+  @Query("SELECT (SELECT COUNT(*) FROM attendances) == 0")
   fun isEmpty(): Boolean
 }

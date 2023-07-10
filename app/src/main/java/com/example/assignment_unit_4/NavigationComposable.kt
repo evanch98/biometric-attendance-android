@@ -15,8 +15,7 @@ import com.example.assignment_unit_4.auth.SignUp
 fun Navigation(
   navController: NavHostController,
   activity: FragmentActivity,
-  database: AppDatabase,
-  locationPermissionRequest: ActivityResultLauncher<Array<String>>
+  database: AppDatabase
 ) {
 
   val sharedPreferences =
@@ -38,8 +37,7 @@ fun Navigation(
       Home(
         navController = navController,
         activity = activity,
-        database = database,
-        locationPermissionRequest = locationPermissionRequest
+        database = database
       )
     }
   }

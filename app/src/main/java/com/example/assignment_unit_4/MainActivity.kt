@@ -75,7 +75,6 @@ fun MyNavigation(
   Navigation(
     navController = navController,
     activity = activity,
-    database = database,
-    locationPermissionRequest = locationPermissionRequest
+    database = database
   )
 }

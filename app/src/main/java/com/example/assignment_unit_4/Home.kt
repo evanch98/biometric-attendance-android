@@ -2,6 +2,7 @@ package com.example.assignment_unit_4
 
 
 import android.content.Context
+import android.location.Location
 import androidx.activity.result.ActivityResultLauncher
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -44,6 +45,15 @@ fun Home(
   database: AppDatabase,
   locationPermissionRequest: ActivityResultLauncher<Array<String>>
 ) {
+
+  val locationState by remember {
+    mutableStateOf<Location?>(null)
+  }
+
+  LaunchedEffect(Unit) {
+    val location = getLastKnownLocation()
+    locationState = location
+  }
 
   var showSnackBar by remember {
     mutableStateOf(false)

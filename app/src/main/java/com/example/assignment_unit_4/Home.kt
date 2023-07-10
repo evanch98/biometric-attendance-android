@@ -1,5 +1,6 @@
 package com.example.assignment_unit_4
 
+
 import android.content.Context
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -38,11 +39,6 @@ import kotlinx.coroutines.delay
 @Composable
 fun Home(navController: NavController, activity: FragmentActivity, database: AppDatabase) {
 
-  val sharedPreferences =
-    LocalContext.current.getSharedPreferences("UserAccountData", Context.MODE_PRIVATE)
-
-  val name = sharedPreferences.getString("name", "")
-
   var showSnackBar by remember {
     mutableStateOf(false)
   }
@@ -51,15 +47,24 @@ fun Home(navController: NavController, activity: FragmentActivity, database: App
     mutableStateOf("")
   }
 
+  val context = LocalContext.current
+
+  val sharedPreferences =
+    context.getSharedPreferences("UserAccountData", Context.MODE_PRIVATE)
+
+  val name = sharedPreferences.getString("name", "")
+
   Scaffold(topBar = {
     TopAppBar(
       title = { Text(text = "Home") },
       colors = TopAppBarDefaults.smallTopAppBarColors(containerColor = Purple80)
     )
   }) { contentPadding ->
-    Box(modifier = Modifier
-      .padding(contentPadding)
-      .fillMaxHeight()) {
+    Box(
+      modifier = Modifier
+        .padding(contentPadding)
+        .fillMaxHeight()
+    ) {
       Column(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,

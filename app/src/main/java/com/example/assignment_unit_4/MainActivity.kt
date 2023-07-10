@@ -5,6 +5,7 @@ import android.content.pm.PackageManager
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.compose.setContent
+import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
@@ -30,20 +31,23 @@ class MainActivity : FragmentActivity() {
 
   val locationPermissionRequest = registerForActivityResult(
     ActivityResultContracts.RequestMultiplePermissions()
-  ) {
-    permissions ->
+  ) { permissions ->
     when {
       requiredPermissions.all {
         ContextCompat.checkSelfPermission(this, it) != PackageManager.PERMISSION_GRANTED
       } -> {
         Toast.makeText(this, "Access granted", Toast.LENGTH_SHORT).show()
       }
+
       permissions.getOrDefault(Manifest.permission.ACCESS_FINE_LOCATION, false) -> {
         Toast.makeText(this, "Access granted", Toast.LENGTH_SHORT).show()
       }
+
       permissions.getOrDefault(Manifest.permission.ACCESS_COARSE_LOCATION, false) -> {
         Toast.makeText(this, "Access granted", Toast.LENGTH_SHORT).show()
-      } else -> {
+      }
+
+      else -> {
         Toast.makeText(this, "Access denied", Toast.LENGTH_SHORT).show()
       }
     }
@@ -55,7 +59,7 @@ class MainActivity : FragmentActivity() {
       Assignment_unit_4Theme {
         // A surface container using the 'background' color from the theme
         Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background) {
-          MyNavigation(this@MainActivity, database)
+          MyNavigation(this@MainActivity, database, locationPermissionRequest)
         }
       }
     }
@@ -63,7 +67,11 @@ class MainActivity : FragmentActivity() {
 }
 
 @Composable
-fun MyNavigation(activity: FragmentActivity, database: AppDatabase) {
+fun MyNavigation(
+  activity: FragmentActivity,
+  database: AppDatabase,
+  locationPermissionRequest: ActivityResultLauncher<Array<String>>
+) {
   val navController = rememberNavController()
   Navigation(navController = navController, activity = activity, database = database)
 }

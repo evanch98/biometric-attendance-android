@@ -73,5 +73,10 @@ fun MyNavigation(
   locationPermissionRequest: ActivityResultLauncher<Array<String>>
 ) {
   val navController = rememberNavController()
-  Navigation(navController = navController, activity = activity, database = database)
+  Navigation(
+    navController = navController,
+    activity = activity,
+    database = database,
+    locationPermissionRequest = locationPermissionRequest
+  )
 }

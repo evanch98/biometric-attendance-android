@@ -21,7 +21,8 @@ import com.example.assignment_unit_4.ui.theme.Assignment_unit_4Theme
 class MainActivity : FragmentActivity() {
 
   private val database by lazy {
-    Room.databaseBuilder(applicationContext, AppDatabase::class.java, "attendanceDatabase").build()
+    Room.databaseBuilder(applicationContext, AppDatabase::class.java, "attendanceDatabase")
+      .allowMainThreadQueries().build()
   }
 
   private val requiredPermissions = arrayOf(
@@ -46,6 +47,7 @@ class MainActivity : FragmentActivity() {
       permissions.getOrDefault(Manifest.permission.ACCESS_COARSE_LOCATION, false) -> {
         Toast.makeText(this, "Access granted", Toast.LENGTH_SHORT).show()
       }
+
       else -> {
         Toast.makeText(this, "Access denied", Toast.LENGTH_SHORT).show()
       }

@@ -1,7 +1,10 @@
 package com.example.assignment_unit_4
 
 
+import android.Manifest
+import android.annotation.SuppressLint
 import android.content.Context
+import android.content.pm.PackageManager
 import android.location.Location
 import androidx.activity.result.ActivityResultLauncher
 import androidx.compose.foundation.layout.Arrangement
@@ -31,12 +34,16 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.core.app.ActivityCompat
 import androidx.fragment.app.FragmentActivity
 import androidx.navigation.NavController
 import com.example.assignment_unit_4.ui.theme.Purple80
 import com.example.assignment_unit_4.utils.SnackBar
+import com.google.android.gms.location.LocationServices
 import kotlinx.coroutines.delay
+import kotlin.coroutines.suspendCoroutine
 
+@SuppressLint("MissingPermission")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun Home(
@@ -48,11 +55,6 @@ fun Home(
 
   val locationState by remember {
     mutableStateOf<Location?>(null)
-  }
-
-  LaunchedEffect(Unit) {
-    val location = getLastKnownLocation()
-    locationState = location
   }
 
   var showSnackBar by remember {

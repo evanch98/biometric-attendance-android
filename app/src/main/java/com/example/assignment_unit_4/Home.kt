@@ -2,6 +2,7 @@ package com.example.assignment_unit_4
 
 
 import android.content.Context
+import androidx.activity.result.ActivityResultLauncher
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -37,7 +38,12 @@ import kotlinx.coroutines.delay
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun Home(navController: NavController, activity: FragmentActivity, database: AppDatabase) {
+fun Home(
+  navController: NavController,
+  activity: FragmentActivity,
+  database: AppDatabase,
+  locationPermissionRequest: ActivityResultLauncher<Array<String>>
+) {
 
   var showSnackBar by remember {
     mutableStateOf(false)

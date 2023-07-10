@@ -29,7 +29,7 @@ fun ViewAttendance(navController: NavController, database: AppDatabase) {
   val databaseAttendance by database.attendanceDao().getAll().observeAsState(emptyList())
   Scaffold(topBar = {
     TopAppBar(
-      title = { Text(text = "Attendancea") },
+      title = { Text(text = "Attendances") },
       colors = TopAppBarDefaults.smallTopAppBarColors(containerColor = Purple80)
     )
   }) { contentPadding ->

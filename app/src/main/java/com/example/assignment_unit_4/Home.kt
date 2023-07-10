@@ -7,7 +7,6 @@ import android.content.pm.PackageManager
 import android.os.Looper
 import android.widget.Toast
 import androidx.activity.compose.rememberLauncherForActivityResult
-import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -60,9 +59,8 @@ fun Home(
   database: AppDatabase,
 ) {
 
-  var locationCallback: LocationCallback? = null
-  var fusedLocationClient: FusedLocationProviderClient? = null
-  var locationRequired = false
+  val locationCallback: LocationCallback?
+  val fusedLocationClient: FusedLocationProviderClient?
 
   val context = LocalContext.current
 
@@ -84,8 +82,7 @@ fun Home(
   ) { permissions ->
     val areGranted = permissions.values.reduce { acc, next -> acc && next }
     if (areGranted) {
-      locationRequired = true
-      startLocationUpdates(context, locationCallback, fusedLocationClient)
+      startLocationUpdates(locationCallback, fusedLocationClient)
       Toast.makeText(context, "Permission Granted", Toast.LENGTH_SHORT).show()
     } else {
       Toast.makeText(context, "Permission Denied", Toast.LENGTH_SHORT).show()
@@ -134,7 +131,7 @@ fun Home(
             if (permissions.all {
                 ContextCompat.checkSelfPermission(context, it) == PackageManager.PERMISSION_GRANTED
               }) {
-              startLocationUpdates(context, locationCallback, fusedLocationClient)
+              startLocationUpdates(locationCallback, fusedLocationClient)
             } else {
               launchMultiplePermissions.launch(permissions)
             }
@@ -176,7 +173,7 @@ fun Home(
             if (permissions.all {
                 ContextCompat.checkSelfPermission(context, it) == PackageManager.PERMISSION_GRANTED
               }) {
-              startLocationUpdates(context, locationCallback, fusedLocationClient)
+              startLocationUpdates(locationCallback, fusedLocationClient)
             } else {
               launchMultiplePermissions.launch(permissions)
             }
@@ -236,7 +233,6 @@ fun Home(
 
 @SuppressLint("MissingPermission")
 private fun startLocationUpdates(
-  context: Context,
   locationCallback: LocationCallback?,
   fusedLocationClient: FusedLocationProviderClient?
 ) {

@@ -228,7 +228,7 @@ fun Home(
         }
         Spacer(modifier = Modifier.height(30.dp))
         Button(
-          onClick = { Toast.makeText(context, "${database.attendanceDao().isEmpty()}", Toast.LENGTH_SHORT).show() }, modifier = Modifier
+          onClick = { navController.navigate(ViewAttendance.route) }, modifier = Modifier
             .width(250.dp)
             .height(50.dp)
         ) {

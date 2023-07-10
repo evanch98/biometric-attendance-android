@@ -1,11 +1,7 @@
 package com.example.assignment_unit_4
 
-
-import android.Manifest
 import android.annotation.SuppressLint
 import android.content.Context
-import android.content.pm.PackageManager
-import android.location.Location
 import androidx.activity.result.ActivityResultLauncher
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -34,14 +30,11 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.core.app.ActivityCompat
 import androidx.fragment.app.FragmentActivity
 import androidx.navigation.NavController
 import com.example.assignment_unit_4.ui.theme.Purple80
 import com.example.assignment_unit_4.utils.SnackBar
-import com.google.android.gms.location.LocationServices
 import kotlinx.coroutines.delay
-import kotlin.coroutines.suspendCoroutine
 
 @SuppressLint("MissingPermission")
 @OptIn(ExperimentalMaterial3Api::class)
@@ -52,10 +45,7 @@ fun Home(
   database: AppDatabase,
   locationPermissionRequest: ActivityResultLauncher<Array<String>>
 ) {
-
-  val locationState by remember {
-    mutableStateOf<Location?>(null)
-  }
+  val context = LocalContext.current
 
   var showSnackBar by remember {
     mutableStateOf(false)
@@ -64,8 +54,6 @@ fun Home(
   var snackBarMessage by remember {
     mutableStateOf("")
   }
-
-  val context = LocalContext.current
 
   val sharedPreferences =
     context.getSharedPreferences("UserAccountData", Context.MODE_PRIVATE)
@@ -108,7 +96,7 @@ fun Home(
                   )
                 )
                 showSnackBar = true
-                snackBarMessage = "Authentication Successful"
+                snackBarMessage = "Authentication successful"
               },
               onError = { errorCode, errorString ->
                 run {

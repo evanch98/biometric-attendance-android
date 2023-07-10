@@ -46,7 +46,6 @@ class MainActivity : FragmentActivity() {
       permissions.getOrDefault(Manifest.permission.ACCESS_COARSE_LOCATION, false) -> {
         Toast.makeText(this, "Access granted", Toast.LENGTH_SHORT).show()
       }
-
       else -> {
         Toast.makeText(this, "Access denied", Toast.LENGTH_SHORT).show()
       }

@@ -100,6 +100,8 @@ fun Home(
   val sharedPreferences =
     context.getSharedPreferences("UserAccountData", Context.MODE_PRIVATE)
 
+  val id = context.getSharedPreferences("id", Context.MODE_PRIVATE)
+
   val name = sharedPreferences.getString("name", "")
 
   Scaffold(topBar = {
@@ -145,6 +147,7 @@ fun Home(
                 if (currentLocation.latitude == LATITUDE && currentLocation.longitude == LONGITUDE) {
                   showSnackBar = true
                   snackBarMessage = "Authentication successful."
+                  id.edit().putInt("id", id.getInt("id", 0) + 1).apply()
                 } else {
                   showSnackBar = true
                   snackBarMessage = "Authentication unsuccessful. Try Again."

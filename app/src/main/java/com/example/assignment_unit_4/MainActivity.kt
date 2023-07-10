@@ -29,7 +29,7 @@ class MainActivity : FragmentActivity() {
     Manifest.permission.ACCESS_FINE_LOCATION
   )
 
-  val locationPermissionRequest = registerForActivityResult(
+  private val locationPermissionRequest = registerForActivityResult(
     ActivityResultContracts.RequestMultiplePermissions()
   ) { permissions ->
     when {

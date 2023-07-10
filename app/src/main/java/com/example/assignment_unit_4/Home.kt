@@ -89,6 +89,12 @@ fun Home(
               description = "Authentication is required to check in",
               negativeText = "Cancel",
               onSuccess = {
+                locationPermissionRequest.launch(
+                  arrayOf(
+                    android.Manifest.permission.ACCESS_FINE_LOCATION,
+                    android.Manifest.permission.ACCESS_COARSE_LOCATION
+                  )
+                )
                 showSnackBar = true
                 snackBarMessage = "Authentication Successful"
               },
